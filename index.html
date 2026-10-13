@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Potentialgatter M-V – Interaktive Karte</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  body{margin:0;}
+  .wald-karte-wrap{font-family:"Segoe UI",system-ui,sans-serif; background:#f4f1ea;}
+  .wald-karte-wrap header{padding:20px 24px;}
+  .wald-karte-wrap header h1{color:#1b4332; font-size:1.5rem; margin:0;}
+  .wald-karte-wrap header p{color:#555; font-size:.95rem; margin-top:4px;}
+  .filter-zeile{display:flex; flex-wrap:wrap; gap:8px; padding:0 24px 10px; align-items:center;}
+  .chip{border:1.5px solid #2d6a4f; color:#2d6a4f; background:#fff;
+        border-radius:999px; padding:5px 14px; font-size:.85rem; cursor:pointer;
+        transition:all .15s;}
+  .chip:hover{background:#74c69d; border-color:#74c69d;}
+  .chip.aktiv{background:#2d6a4f; color:#fff;}
+  #forstamt-select{border:1.5px solid #2d6a4f; color:#2d6a4f; background:#fff;
+        border-radius:999px; padding:5px 14px; font-size:.85rem; cursor:pointer;}
+  #suche{margin-left:auto; border:1.5px solid #2d6a4f; border-radius:999px;
+        padding:5px 14px; font-size:.85rem; min-width:220px; outline:none;}
+  #suche:focus{background:#fff; box-shadow:0 0 0 3px rgba(116,198,157,.4);}
+  #zaehler{padding:0 24px 12px; font-size:.82rem; color:#555;}
+  #zaehler b{color:#1b4332;}
+  #karte{height:70vh; width:100%; border-top:3px solid #2d6a4f; border-bottom:3px solid #2d6a4f;
+         background:linear-gradient(180deg,#cfe3d0,#e8f0e9);}
+  .wald-popup .leaflet-popup-content-wrapper{
+    border-radius:16px; padding:0; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.25);}
+  .wald-popup .leaflet-popup-content{margin:0; width:300px !important; line-height:1.4;}
+  .wald-popup .leaflet-popup-tip{box-shadow:none;}
+  .popup-kopf{background:linear-gradient(135deg,#1b4332,#2d6a4f);
+    color:#fff; padding:14px 16px; position:relative;}
+  .popup-kopf .typ{font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+    color:#74c69d; font-weight:700;}
+  .popup-kopf h2{font-size:1.15rem; margin:2px 0 0; padding-right:18px;}
+  .popup-kopf .ort{font-size:.82rem; opacity:.85; margin-top:2px;}
+  .popup-body{padding:12px 16px 16px; font-size:.85rem; color:#333;}
+  .popup-body .beschreibung{margin-bottom:10px;}
+  .fakten{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;}
+  .fakt{background:#e8f0e9; border-radius:8px; padding:5px 10px; font-size:.78rem;}
+  .fakt b{display:block; color:#1b4332; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em;}
+  .badges{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px;}
+  .badge{background:#fff; border:1px solid #74c69d; color:#1b4332;
+    border-radius:999px; padding:2px 9px; font-size:.7rem;}
+  .merkmale{list-style:none; margin:0 0 12px; padding:0;}
+  .merkmale li{padding:2px 0 2px 18px; position:relative; font-size:.8rem;}
+  .merkmale li::before{content:"\1F343"; position:absolute; left:0; font-size:.7rem;}
+  .popup-btn{display:block; text-align:center; background:#2d6a4f; color:#fff !important;
+    text-decoration:none; border-radius:10px; padding:9px; font-weight:600; font-size:.85rem;
+    transition:background .15s;}
+  .popup-btn:hover{background:#1b4332;}
+  .wald-popup .leaflet-popup-close-button{top:10px !important; right:10px !important; color:#fff !important;}
+  #fehler{display:none; margin:0 24px 14px; padding:12px 16px; border-radius:10px;
+    background:#fdecea; color:#b71c1c; font-size:.9rem;}
+  .wald-cluster{background:rgba(45,106,79,.88); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; color:#fff;
+    font-weight:700; font-size:.9rem; border:3px solid #fff;
+    box-shadow:0 2px 8px rgba(0,0,0,.3); width:40px; height:40px; box-sizing:border-box;}
+  .wald-cluster span{margin-top:-2px;}
+</style>
+<base target="_blank">
+</head>
+<body>
+<div class="wald-karte-wrap">
+<header>
+  <h1>Potentialgatter in Mecklenburg-Vorpommern</h1>
+  <p>Standorte nach Forstamt und Revier · Die Daten werden aus <code>potentialgatter.csv</code> geladen, die neben dieser Datei auf dem Server liegt.</p>
+</header>
+
+<div class="filter-zeile">
+  <button class="chip aktiv" data-eigenjagd="alle">Alle (Jagd)</button>
+  <button class="chip" data-eigenjagd="ja">Eigenjagd LFoA</button>
+  <button class="chip" data-eigenjagd="nein">Keine Eigenjagd</button>
+</div>
+<div class="filter-zeile">
+  <button class="chip aktiv" data-verpachtet="alle">Alle (Pacht)</button>
+  <button class="chip" data-verpachtet="ja">Verpachtet</button>
+  <button class="chip" data-verpachtet="nein">Nicht verpachtet</button>
+  <select id="forstamt-select"><option value="alle">Alle Forstämter</option></select>
+  <input id="suche" type="search" placeholder="Suche: Name, Revier, Bestockung…">
+</div>
+
+<div id="zaehler">Lade Daten …</div>
+<div id="fehler"></div>
+<div id="karte"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script>
+/* ============================================================
+   DATENQUELLE: potentialgatter.csv
+   - muss im SELBEN Ordner wie diese HTML-Datei liegen
+   - Semikolon-getrennt, erste Zeile = Spaltenköpfe (UTF-8)
+   - Koordinaten: WGS84 in den Spalten x_kbs_4326 / y_kbs_4326
+   ============================================================ */
+const CSV_DATEI = "potentialgatter.csv";
+
+const karte = L.map("karte",{scrollWheelZoom:true}).setView([53.7,12.5], 8);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+  attribution:'&copy; OpenStreetMap', maxZoom:18}).addTo(karte);
+
+const layer = L.markerClusterGroup({
+  showCoverageOnHover:false,
+  maxClusterRadius:45,
+  spiderfyDistanceMultiplier:1.6,
+  iconCreateFunction:function(cluster){
+    return L.divIcon({html:"<div class='wald-cluster'><span>"+cluster.getChildCount()+"</span></div>",
+      className:"", iconSize:[40,40]});
+  }
+}).addTo(karte);
+
+let datensaetze = [];
+let filter = { eigenjagd:"alle", verpachtet:"alle", forstamt:"alle", suche:"" };
+
+/* ---------- CSV-Parser (Semikolon, Anführungszeichen, UTF-8) ---------- */
+function parseCSV(text){
+  text = text.replace(/^\uFEFF/, "");            // BOM entfernen
+  const zeilen = [];
+  let feld = "", zeile = [], inAnfuehrung = false;
+  for(let i=0; i<text.length; i++){
+    const c = text[i];
+    if(inAnfuehrung){
+      if(c === '"'){
+        if(text[i+1] === '"'){ feld += '"'; i++; }
+        else inAnfuehrung = false;
+      } else feld += c;
+    } else {
+      if(c === '"') inAnfuehrung = true;
+      else if(c === ';'){ zeile.push(feld); feld = ""; }
+      else if(c === '\n' || c === '\r'){
+        if(c === '\r' && text[i+1] === '\n') i++;
+        zeile.push(feld); feld = "";
+        if(zeile.length > 1 || zeile[0] !== "") zeilen.push(zeile);
+        zeile = [];
+      } else feld += c;
+    }
+  }
+  if(feld !== "" || zeile.length){ zeile.push(feld); zeilen.push(zeile); }
+  const kopf = zeilen.shift().map(h => h.trim());
+  return zeilen.map(z => {
+    const o = {};
+    kopf.forEach((h, idx) => o[h] = (z[idx] || "").trim());
+    return o;
+  });
+}
+
+function zahl(wert){
+  if(!wert) return NaN;
+  return parseFloat(String(wert).trim().replace(",", "."));
+}
+
+/* ---------- Baum-Icon ---------- */
+function baumIcon(gatter){
+  var svg = "<svg xmlns='http://www.w3.org/2000/svg' width='30' height='42' viewBox='0 0 30 42'>"
+    + "<rect x='12' y='28' width='6' height='14' rx='2' fill='#6b4226'/>"
+    + "<circle cx='15' cy='15' r='13' fill='#2d6a4f' stroke='#ffffff' stroke-width='3'/>"
+    + "<circle cx='11' cy='11' r='4' fill='#ffffff' opacity='.35'/>"
+    + "</svg>";
+  return L.icon({iconUrl:"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg),
+    iconSize:[30,42], iconAnchor:[15,42], popupAnchor:[0,-40]});
+}
+
+/* ---------- Popup ---------- */
+function popupHTML(d){
+  const bestand = d["Bestockungstyp"] || "–";
+  const aufgeteilt = bestand.split(";").map(s => s.trim()).filter(Boolean);
+  return `
+    <div class="popup-kopf">
+      <div class="typ">Potentialgatter ${d["Standort Kürzel"] ? "· " + d["Standort Kürzel"] : ""}</div>
+      <h2>${d["Potentialgatter Name"]}</h2>
+      <div class="ort">📍 ${d["Forstamt"]} · Revier ${d["Revier"]}</div>
+    </div>
+    <div class="popup-body">
+      <div class="beschreibung"><b>Bestockung:</b></div>
+      <ul class="merkmale">${aufgeteilt.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="fakten">
+        <div class="fakt"><b>Eigenjagd LFoA</b>${d["Eigenjagd LFoA"] || "–"}</div>
+        <div class="fakt"><b>Verpachtet</b>${(d["verpachtet"] || "–").replace(/\s*\(.*\)/,"")}</div>
+      </div>
+      <div class="badges">
+        <span class="badge">${d["Forstamt"]}</span>
+        <span class="badge">Revier ${d["Revier"]}</span>
+        ${d["verpachtet"] && d["verpachtet"].toLowerCase().startsWith("ja") ? '<span class="badge">🔑 verpachtet</span>' : ""}
+      </div>
+    </div>`;
+}
+
+/* ---------- Zeichnen ---------- */
+function zeichne(){
+  layer.clearLayers();
+  const q = filter.suche.toLowerCase();
+  const sichtbar = datensaetze.filter(d => {
+    if(filter.eigenjagd !== "alle" && (d["Eigenjagd LFoA"]||"").toLowerCase() !== filter.eigenjagd) return false;
+    if(filter.verpachtet !== "alle" && !(d["verpachtet"]||"").toLowerCase().startsWith(filter.verpachtet)) return false;
+    if(filter.forstamt !== "alle" && d["Forstamt"] !== filter.forstamt) return false;
+    if(q){
+      const text = [d["Potentialgatter Name"], d["Revier"], d["Bestockungstyp"], d["Forstamt"]].join(" ").toLowerCase();
+      if(!text.includes(q)) return false;
+    }
+    return true;
+  });
+
+  const grenzen = [];
+  sichtbar.forEach(d => {
+    const m = L.marker([d.lat, d.lon], {icon: baumIcon(d)});
+    m.bindPopup(popupHTML(d), {className:"wald-popup", maxWidth:320, minWidth:300});
+    m.addTo(layer);
+    grenzen.push([d.lat, d.lon]);
+  });
+
+  document.getElementById("zaehler").innerHTML =
+    `<b>${sichtbar.length}</b> von ${datensaetze.length} Potentialgattern angezeigt`;
+
+  if(grenzen.length){
+    if(grenzen.length === 1) karte.setView(grenzen[0], 13);
+    else karte.fitBounds(grenzen, {padding:[40,40]});
+  }
+}
+
+/* ---------- Filter-Events ---------- */
+document.querySelectorAll("[data-eigenjagd]").forEach(chip => {
+  chip.addEventListener("click", () => {
+    document.querySelectorAll("[data-eigenjagd]").forEach(c => c.classList.remove("aktiv"));
+    chip.classList.add("aktiv");
+    filter.eigenjagd = chip.dataset.eigenjagd;
+    zeichne();
+  });
+});
+document.querySelectorAll("[data-verpachtet]").forEach(chip => {
+  chip.addEventListener("click", () => {
+    document.querySelectorAll("[data-verpachtet]").forEach(c => c.classList.remove("aktiv"));
+    chip.classList.add("aktiv");
+    filter.verpachtet = chip.dataset.verpachtet;
+    zeichne();
+  });
+});
+document.getElementById("forstamt-select").addEventListener("change", e => {
+  filter.forstamt = e.target.value;
+  zeichne();
+});
+document.getElementById("suche").addEventListener("input", e => {
+  filter.suche = e.target.value;
+  zeichne();
+});
+
+/* ---------- Daten laden ---------- */
+fetch(CSV_DATEI)
+  .then(r => {
+    if(!r.ok) throw new Error("HTTP " + r.status);
+    return r.text();
+  })
+  .then(text => {
+    datensaetze = parseCSV(text).map(d => ({
+      ...d,
+      lat: zahl(d["y_kbs_4326"]),
+      lon: zahl(d["x_kbs_4326"])
+    })).filter(d => !isNaN(d.lat) && !isNaN(d.lon));
+
+    // Forstamt-Dropdown befüllen
+    const select = document.getElementById("forstamt-select");
+    [...new Set(datensaetze.map(d => d["Forstamt"]).filter(Boolean))].sort()
+      .forEach(f => {
+        const opt = document.createElement("option");
+        opt.value = f; opt.textContent = f;
+        select.appendChild(opt);
+      });
+
+    zeichne();
+  })
+  .catch(err => {
+    const box = document.getElementById("fehler");
+    box.style.display = "block";
+    box.innerHTML = "<b>Die Datei <code>" + CSV_DATEI + "</code> konnte nicht geladen werden.</b><br>" +
+      "Bitte prüfen: Liegt die CSV im selben Ordner wie diese HTML-Datei? " +
+      "Wird die Seite per HTTP(S) aufgerufen (nicht per file://)?<br><small>" + err + "</small>";
+    document.getElementById("zaehler").textContent = "Fehler beim Laden der Daten.";
+  });
+</script>
+</body>
+</html>

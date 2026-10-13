@@ -1,0 +1,59 @@
+﻿Potentialgatter Name;Forstamt;Revier;Standort Kürzel;Bestockungstyp;Eigenjagd LFoA;verpachtet;x_kbs_5650;y_kbs_5650;x_kbs_4326;y_kbs_4326
+02-A;Rothemühl;Nettelgrund;KM2;Buche Überhalt;ja;nein;33423740,66;5937710,54;13,848082;53,582694
+02-B;Rothemühl;Grünhof;Z2;Kiefer (ca. 80 J.);ja;nein;33424399,3;5941647,971;13,857074;53,618174
+03-A;Lüttenhagen;Feldberger Hütte;M2;3,02ha: Kiefer (128J.), Fichte (81J.), Buche (81J.), Douglasie (81J.), Fichte (81J.);ja;nein;33399260,04;5914369,052;13,485907;53,368827
+03-B;Lüttenhagen;Feldberger Hütte;K2;"3,17ha: OB Europ. Lärche (60J.), Buche (70J.); UN Buche (19J.), Ahorn (19J.), Hainbuche (19J.), Vogelkirsche (19J.)";ja;nein;33398263,77;5914117,633;13,47102;53,366377
+05-A;Mirow;Leussow I;Z2;"Kiefer (ca. 17ha; ca. 71 J.)";ja;nein;33356848,96;5908537,333;12,851535;53,30666
+05-B;Mirow;Leussow I;M2;"Kiefer (ca. 10ha; 75 J.)";ja;nein;33356514,77;5907259,021;12,847101;53,295087
+06-A;Neustrelitz;Wilhelminenhof;R2;"Buche (17,16ha; 162 J.)";ja;nein;33377621,14;5917830,444;13,159507;53,395358
+06-B;Neustrelitz;Zinow;Z2;"Kiefer (13,6ha; 74 J.)";ja;ja;33376718,4;5910165,414;13,148926;53,326284
+07-A;Neubrandenburg;Siedenbollentin;K2;"Buche (1,77ha; 150J.); Eiche (0,12ha; 150J.); Fichte (0,07; 139J.)";ja;nein;33395482,81;5956248,302;13,415156;53,744386
+07-B;Neubrandenburg;Golchen;NR2w;"Buche und Hainbuche (86J.); Ahorn und Esche (81J.); Kirsche (81-86J.)";ja;nein;33385111,76;5962346,3;13,255701;53,796989
+08-A;Torgelow;Jädkemühl;Z2 (neue Kartierung);"Kiefer (2 Kulissenhiebe, insg. 3,82ha; 154 J.)";ja;nein;33435172,22;5946884,873;14,018818;53,666683
+08-B;Torgelow;Jädkemühl;Z1;"Kiefer (5,39ha; 76 J.)";ja;nein;33436445,67;5949720,555;14,037508;53,692324
+09-A;Neu Pudagla;Kamminke;K2;"Eiche (4,33ha; 168 J.); Buche (1,07ha; 101 J.)";ja;nein;33445512,53;5974182,193;14,170475;53,913192
+09-B;Neu Pudagla;Stagnieß;Kx;"Sitkafichte (2,95ha; 52 J.)";ja;nein;33440344,6;5984140,434;14,089861;54,002116
+10-A;Jägerhof;Buddenhagen;M2;"Buche (3,33ha; 128 J.); Eiche (Restvorrat; 156 J.)";ja;nein;33412591,87;5982262,277;13,667094;53,981289
+10-B;Jägerhof;Jagdkrug;Z1;Kiefer (88 J.);ja;nein;33412937,54;5985582,809;13,671414;54,011184
+11-A;Poggendorf;Wendeforst;K2;Blöße (ehemals Fichte);ja;ja;33364996,43;5975892,296;12,944542;53,913835
+11-B;Poggendorf;Sievertshagen;NK2;"Eiche (6,45ha; 175 J.) mit Buche (1,25ha; 175 J.)";ja;nein;33364946,43;6005155,536;12,93076;54,176665
+13-A;Schuenhagen;Elmenhorst;K2/K1;"Buche (115 J.); Europäische Lärche (115 J.); Vogelkirsche (115 J.)";ja;nein;33372347,36;6008482,591;13,042667;54,208444
+13-B;Schuenhagen;Buchenhorst;NK1/NR1;"Blöße (0,32ha); vorher Sitkafichte (40 J.)";ja;nein;33338394,12;6018126,258;12,517338;54,285459
+14-A;Rügen;Gelm;Kx;"Kiefer (1,21ha; 165 J.)";ja;nein;33396517,31;6049894,492;13,398667;54,585931
+14-B;Rügen;Gelm;Kx;"Kiefer (4,52ha; Alter divers, überwiegend 120 J.)";ja;nein;33395995,8;6050649,657;13,390333;54,592608
+15-A;Dargun;Fürstenhof;K2;Buche / Eiche;ja;nein;33354628,08;5977531,219;12,786028;53,92575
+15-B;Dargun;Dargun;K2;Buche;ja;nein;33358384,26;5971390,787;12,846028;53,871639
+16-A;Stavenhagen;Panstorf;K2;"Eiche (0,7ha; 205J.); Buche (0,6ha 130J. und 0,27ha 80J.)";ja;nein;33345684,9;5957117,069;12,660194;53,739831
+16-B;Stavenhagen;Wolfskuhle;K2;"Eiche (145 J.); Unterstand Hainbuche (64 J.)";ja;nein;33362167,2;5957635,643;12,909682;53,749106
+17-A;Nossentiner Heide;Cramon;K2;Eiche (68J.);ja;nein;33333935,85;5944562,193;12,48895;53,623483
+17-B;Nossentiner Heide;Loppin;M2;"Oberstand Kiefer (100J.); Unterstand Kiefer (2J.; Pflanzung)";ja;ja;33331917,55;5935643,292;12,463267;53,54275
+21-A;Billenhagen;Billenhagen;NZ2;Freifläche;ja;nein;33328889,41;6001394,524;12,381013;54,132146
+21-B;Billenhagen;Willershagen;K1;Eichen-Buchen-Bestand ;nein;-;33322819,82;6004146,671;12,28661;54,154798
+18-A;Wredenhagen;Satow;M2;"Kiefer (4,03ha; 88 J.); Fichte (0,3ha; 52 J.); Restvorrat Eiche (157 J.); Unterstand Bergahorn (0,43ha; 34)";ja;nein;33326173,25;5922903,023;12,383724;53,426482
+18-B;Wredenhagen;Satow;M2;"Kiefer (10,04ha; 81 J.)";ja;nein;33325110,79;5924101,133;12,367086;53,436889
+19-A;Sandhof;Jellen;M2;"Kiefer (>9ha; 43 J.); Lärchenstreifen am Wegesrand)";ja;nein;33314947,41;5940933,567;12,204337;53,584542
+19-B;Sandhof;Jellen;M2;"Kiefer (ca. 8ha; 80 J.)";ja;nein;33311819,76;5945330,117;12,154496;53,622899
+20-A;Güstrow;Kirch Rosin II;K2;relativ junge Kiefer, Umstellung auf dauerwaldartige Bewirtschaftung;ja;nein;33318784,44;5959366,99;12,251474;53,751379
+20-B;Güstrow;Kirch Rosin I;M2;"Kiefer (10,38ha; 115 J.); Unterstand Buche (10,38ha; 63 J.)";ja;nein;33316708,65;5957811,434;12,220953;53,736688
+22-A;Bad Doberan;Bad Doberan;WR2/WK2;Buche (127 J.), Eiche (127 J.);ja;nein;33296828,98;6001959,736;11,890657;54,125552
+22-B;Bad Doberan;Bad Doberan;Kx;Buche (118 J.), Kiefer (163 J.);ja;nein (seit 4 Jahren nicht mehr);33295549,52;6000656,354;11,87199;54,113348
+23-A;Schlemmin;Qualitz;K2;"0,73ha; Oberstand Kiefer (140 J.); Unterstand Buche (99 J.)";ja;nein;33292610,7;5968935,22;11,848675;53,827498
+23-B;Schlemmin;Qualitz;R2;"Buche (1,23ha; 108 J.)";ja;nein;33295994,45;5968056,37;11,900591;53,820949
+24-A;Gädebehn;Gädebehn;M2;"Kiefer (2,51ha; 93 J.) - Schirmschlag";ja;ja;33273784,13;5943757,722;11,581525;53,59375
+24-B;Gädebehn;Jülchendorf;K2;"Douglasie (0,33ha; 67 J.); Fichte (0,12ha; 67 J.)";ja;nein;33282780,27;5951300,13;11,711957;53,665237
+26-A;Grevesmühlen;Gostorf;M2;"Kiefer (11,03ha; 73 J.); Eiche (1,66ha; 73 und 89 J.); Fichte (0,45ha; 73 J.)";ja;nein;33246226,11;5973426,262;11,141743;53,847212
+26-B;Grevesmühlen;Gostorf;K2;"Kiefer (0,63ha; 114 J.); Fichte (0,62ha; 114 und 57 J.)";ja;nein;33246852,44;5975032,391;11,149918;53,861921
+27-A;Radelübbe;Dümmer;K2;"Eiche (12J.); Kiefer (122J.); Buche (80J.)";ja;nein;33248659,66;5941319,245;11,204687;53,560443
+27-B;Radelübbe;Bantin;nk;"Fichte (57J.); Kiefer (57J.); Gatter in kleiner Blöße";ja;nein;33246667,98;5942056,497;11,174088;53,566098
+28-A;Friedrichsmoor;Banzkow;Z2g;"Kiefer (7,35ha; 71 J.)";ja;nein;33261278,17;5933446,638;11,400806;53,495708
+28-B;Friedrichsmoor;Bahlenhüschen;Z2;"Kiefer (4,93ha; 136 J.); Buche (4,27ha; 70 J.); Eiche (0,66ha; 70 J.)";ja;nein;33275253,19;5935093,48;11,609909;53,516639
+29-A;Karbow;Karbow;K2;"überwiegend Buche mit Douglasie, Europäische Lärche, Kiefer gemischt (alle 99 J.); Restvorrat Fichte und Küstentanne (99 J.)";ja;nein;33312647,59;5924453,706;12,179487;53,435774
+29-B;Karbow;Poitendorf;M2;Kiefer (99 J.);ja;nein;33290075,43;5915553,781;11,846124;53,347395
+30-A;Grabow;Klein Laasch;A2;"Kiefer (111 J.); vor 2 Jahren gepflügt, Birke gepflanzt + Kiefer Naturverjüngung";ja;nein;33272687,17;5916629,859;11,584602;53,349867
+30-B;Grabow;Steesow;A2;Kiefer (81 J.);ja;nein;33261106,99;5900490,341;11,423096;53,199971
+31-A;Kaliß;Neu Göhren;A2;Kiefer;ja;nein;33257194,15;5895733,881;11,368248;53,155529
+31-B;Kaliß;Leussow II;A2;Kiefer;ja;nein;33254243,71;5909845,81;11,313348;53,280768
+32-A;Jasnitz;Kraaker Mühle;A2g;"Kiefer (6,66ha; 73 J.)";ja;nein;33257964,72;5925843,209;11,356811;53,425988
+32-B;Jasnitz;Eichhof;NZ2;"Blöße (0,96ha), Kiefer (0,34ha; 47 J.); Birke (0,26ha; 47 J.), Eiche (Restvorrat; 231 J.)";ja;nein;33248321,66;5920484,306;11,216274;53,373412
+33-A;Schildfeld;Bengerstorf;M1;"Rotbuche, Winterlinde, Douglasie, Edelkastanie, Stieleiche (91J.); Kiefer (125J.)";ja;nein;33227526,69;5929134,848;10,897018;53,440665
+33-B;Schildfeld;Bengerstorf;MZ2;"Kiefer (1,5ha; 93J.); Fichte (1,5ha; 63J.); frischer Einschlag, Naturverjüngung-Fläche";ja;nein;33219579,72;5925715,08;10,780743;53,405844

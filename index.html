@@ -6,6 +6,7 @@
 <title>Potentialgatter M-V – Interaktive Karte</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
+  html, body { height:100%; margin:0; }
   body{margin:0;}
   .wald-karte-wrap{font-family:"Segoe UI",system-ui,sans-serif; background:#f4f1ea;}
   .wald-karte-wrap header{padding:20px 24px;}
@@ -24,8 +25,14 @@
   #suche:focus{background:#fff; box-shadow:0 0 0 3px rgba(116,198,157,.4);}
   #zaehler{padding:0 24px 12px; font-size:.82rem; color:#555;}
   #zaehler b{color:#1b4332;}
-  #karte{height:70vh; width:100%; border-top:3px solid #2d6a4f; border-bottom:3px solid #2d6a4f;
-         background:linear-gradient(180deg,#cfe3d0,#e8f0e9);}
+  #karte{
+  flex:1;
+  min-height:0;
+  width:100%;
+  border-top:3px solid #2d6a4f;
+  border-bottom:3px solid #2d6a4f;
+  background:linear-gradient(180deg,#cfe3d0,#e8f0e9);
+}
   .wald-popup .leaflet-popup-content-wrapper{
     border-radius:16px; padding:0; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.25);}
   .wald-popup .leaflet-popup-content{margin:0; width:300px !important; line-height:1.4;}
@@ -59,6 +66,12 @@
     font-weight:700; font-size:.9rem; border:3px solid #fff;
     box-shadow:0 2px 8px rgba(0,0,0,.3); width:40px; height:40px; box-sizing:border-box;}
   .wald-cluster span{margin-top:-2px;}
+.wald-karte-wrap{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
 </style>
 <base target="_blank">
 </head>
